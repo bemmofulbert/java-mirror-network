@@ -19,12 +19,16 @@ public class Button extends JButton {
         initEvent();
     }
     public Button(ImageIcon icon) {
-        super();
-        setFont(Utiles.font_button);
-        setBackground(Utiles.green);
+        this("");
         setIcon(icon);
 
-        initEvent();
+        //initEvent();
+    }
+    public Button(String texte,ImageIcon icon) {
+        this(texte);
+        setIcon(icon);
+
+        //initEvent();
     }
     private void initEvent() {
         addMouseListener(new MouseListener() {
@@ -57,5 +61,6 @@ public class Button extends JButton {
     public static void deZoomMenu(JButton but){
         but.setFont(Utiles.font_button);
     }
+
 }
 

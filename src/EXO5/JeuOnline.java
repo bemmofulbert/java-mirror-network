@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Color;
 import EXO5.Vue.Button;
+import EXO5.Vue.Tchat;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,17 +26,19 @@ public class JeuOnline extends JFrame{
 
     int row=1,col=1;
     public ConnexionAttente fen_connexion;
-    public String nomServeur;
-    public int port;
+    private String nomServeur;
+    private int port;
     private Button but_retour;
     public int pos=0;
+    private Tchat tchat;
+    public boolean aToi = false;
     public JeuOnline() {
         this.clientReseau = new Cli(this);
 
         fenetre_firstConf();
         gridLayout = new GridLayout(row,col);
         zoneEnd = new JPanel(new FlowLayout());
-        labelEnd =  new JLabel("up");
+        labelEnd =  new JLabel("UP");
         zoneEnd.add(labelEnd);
 
         zoneJeu = new JPanel(gridLayout);
@@ -54,6 +58,9 @@ public class JeuOnline extends JFrame{
             //buts[i].addActionListener(new GererClick(buts, buts[i],clientReseau));
         }
         //buts[0].setIcon(img);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        tchat = new Tchat(clientReseau);
+        add(tchat,BorderLayout.EAST);
     }
     public JeuOnline(ConnexionAttente fen_connexion,String nomServeur,int port){
         this.fen_connexion = fen_connexion;
@@ -84,7 +91,7 @@ public class JeuOnline extends JFrame{
             //zoneJeu.add(buts[i]);
             //buts[i].addActionListener(new GererClick(buts, buts[i],clientReseau));
         }
-        but_retour = new Button("<< quitter la partie");
+        but_retour = new Button("<< Quitter la partie");
         but_retour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -94,6 +101,8 @@ public class JeuOnline extends JFrame{
             }
         });
         add(but_retour,BorderLayout.NORTH);
+        tchat = new Tchat(clientReseau);
+        add(tchat,BorderLayout.EAST);
     }
 
     public void creer_Grid() {
@@ -161,15 +170,27 @@ public class JeuOnline extends JFrame{
         for (int i=0;i<buts.length;i++){
             buts[i].setEnabled(true);
         }
+        aToi = true;
     }
     public void show_pasToi() {
         labelEnd.setText("pas ton tour !");
         for (int i=0;i<buts.length;i++){
             buts[i].setEnabled(false);
         }
+        aToi = false;
     }
 
     public Cli getClientReseau() {
         return clientReseau;
+    }
+
+    public Tchat getTchat() {
+        return tchat;
+    }
+    public JButton getCurrentBut(){
+        for (JButton but : buts) {
+            if(but.getIcon() != null) return but;
+        }
+        return buts[0];
     }
 }

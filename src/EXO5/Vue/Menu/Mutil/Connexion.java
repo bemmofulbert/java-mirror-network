@@ -6,7 +6,7 @@ import EXO5.Vue.Menu.MenuMin;
 import EXO5.Vue.Utiles;
 
 import javax.swing.*;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -67,7 +67,7 @@ public class Connexion extends MenuMin {
 			center.add(new JPanel());
 
 			JPanel panelEnd =  new JPanel(new GridLayout(1,2));
-			but_connex = new Button("Connexion");
+			but_connex = new Button("Connexion", new ImageIcon("images/connex.png"));
 			but_retour = new Button("<< retour");
 			panelEnd.add(but_retour);
 			panelEnd.add(but_connex);
@@ -106,6 +106,30 @@ public class Connexion extends MenuMin {
 	}
 	public int getPort(){
 		return Integer.parseInt(spin_port.getValue().toString());
+	}
+
+	public void paint(Graphics _g) {
+		super.paintComponent(_g);
+		Graphics2D g = (Graphics2D) _g;
+
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+		Rectangle bounds = getBounds();
+		Paint gradientPaint = new GradientPaint(50, bounds.y, Utiles.blue,
+				-50, bounds.y + bounds.width, Color.orange);
+		g.setPaint(gradientPaint);
+		g.fillRect(0, 0, bounds.width, bounds.height);
+
+		entete.repaint();
+		footer.repaint();
+		lab_ip.repaint();
+		lab_port.repaint();
+		spin_port.repaint();
+		but_connex.repaint();
+		but_retour.repaint();
+		for(JSpinner spin : spins_ip){
+			spin.repaint();
+		}
 	}
 
 }

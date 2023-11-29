@@ -26,7 +26,6 @@ public class Serveur{
         try {
             serverSocket = new ServerSocket(port);
             serveurAccept = new ServeurAccept(this,serveurPret);
-
         }catch (IOException ioe) {
             ioe.printStackTrace();
         }

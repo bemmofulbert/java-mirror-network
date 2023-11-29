@@ -24,6 +24,7 @@ public class MenuMin extends JPanel {
         add(new JPanel(new FlowLayout()),BorderLayout.WEST);
         add(entete,BorderLayout.NORTH);
         add(footer,BorderLayout.SOUTH);
+        setDoubleBuffered(true);
     }
 
     public A_Propos getFooter() {
@@ -41,4 +42,5 @@ public class MenuMin extends JPanel {
     public void setEntete(Entete entete) {
         this.entete = entete;
     }
+
 }

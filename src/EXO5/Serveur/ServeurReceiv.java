@@ -28,7 +28,7 @@ public class ServeurReceiv extends Thread{
                     clients.get(index).setPseudo(message.getText());
                     serveurPret.addClient(message.getText(), clients.get(index));
                 }
-                if(message.getType() == Message.TYPE_BYE){
+                else if(message.getType() == Message.TYPE_BYE){
                     serveurPret.removeClient(clients.get(index));
                     clients.get(index).close();
                     clients.remove(index);
@@ -36,9 +36,11 @@ public class ServeurReceiv extends Thread{
                     if(Serveur.jeton >= clients.size() || Serveur.jeton <0) Serveur.jeton =0;
                     new ServeurSend(new Message(serveurPret.getJeuOnline().pos,false));
                     break;
+                } else if (message.getType() == Message.TYPE_COORD) {
+                    onParameter();
                 }
 
-                onParameter();
+
 
                 new ServeurSend(message);
             }

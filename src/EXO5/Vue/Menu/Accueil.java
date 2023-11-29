@@ -8,9 +8,7 @@ import static EXO5.Main.AllerA;
 import static EXO5.Main.fra;
 
 import javax.swing.*;
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 
 import EXO5.Vue.Button;
 import java.awt.event.MouseEvent;
@@ -43,19 +41,19 @@ public class Accueil extends MenuMin{
         center_sub.setBackground(Utiles.white);
         center.add(center_sub);
 
-        but_single =new Button(string_solo);
+        but_single =new Button(string_solo,new ImageIcon("images/one_player.png"));
         but_single.setFont(Utiles.font_menu);
         //but_single.setBackground(Utiles.green);
         center.add(but_single);
         center.add(new JPanel());
 
-        but_multi =new Button(string_multi);
+        but_multi =new Button(string_multi,new ImageIcon("images/multiplayer.png"));
         but_multi.setFont(Utiles.font_menu);
         //but_multi.setBackground(Utiles.green);
         center.add(but_multi);
         center.add(new JPanel());
 
-        but_exit =new Button(string_exit);
+        but_exit =new Button(string_exit, new ImageIcon("images/quit.png"));
         but_exit.setFont(Utiles.font_menu);
         //but_exit.setBackground(Utiles.green);
         center.add(but_exit);
@@ -144,6 +142,25 @@ public class Accueil extends MenuMin{
     }
     public void deZoomMenu(JButton but){
         but.setFont(Utiles.font_menu);
+    }
+
+    public void paint(Graphics _g) {
+        super.paintComponent(_g);
+        Graphics2D g = (Graphics2D) _g;
+
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        Rectangle bounds = getBounds();
+        Paint gradientPaint = new GradientPaint(50, bounds.y, Utiles.blue,
+                -50, bounds.y + bounds.width, Color.orange);
+        g.setPaint(gradientPaint);
+        g.fillRect(0, 0, bounds.width, bounds.height);
+
+        entete.repaint();
+        footer.repaint();
+        but_multi.repaint();
+        but_single.repaint();
+        but_exit.repaint();
     }
 
 }

@@ -1,5 +1,6 @@
 package EXO5.Serveur;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.SocketException;
 
@@ -22,6 +23,12 @@ public class ServeurSend extends Thread{
                     clients.get(i).getWriter().writeObject(message);
                     clients.get(i).getWriter().flush();
                     System.out.println("serveur redistribution : "+i);
+                    if(message.getType() == Message.TYPE_COORD || message.getType() == Message.TYPE_BYE){
+                        if(!message.isaToi())
+                            clients.get(i).getButDePresentation().setIcon(new ImageIcon("images/user.png"));
+                        else
+                            clients.get(i).getButDePresentation().setIcon(new ImageIcon("images/bille.png"));
+                    }
                 }
 
             }catch (SocketException se){

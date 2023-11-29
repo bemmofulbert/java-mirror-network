@@ -1,10 +1,9 @@
 package EXO5;
 
 import EXO5.Vue.Menu.Accueil;
-import EXO5.Vue.Menu.Mutil.Connexion;
-import EXO5.Vue.Menu.Mutil.ConnexionAttente;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
 
@@ -21,7 +20,7 @@ public class Main {
         //ServeurPret serveurPret = new ServeurPret(jeuOnline);
         //jeuOnline.lancerClient();
 
-        fra.pack();
+        fra.setSize(new Dimension(600,400));
         fra.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fra.show();
     }

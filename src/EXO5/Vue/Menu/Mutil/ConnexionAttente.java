@@ -7,9 +7,7 @@ import EXO5.Vue.Menu.MenuMin;
 import EXO5.Vue.Utiles;
 
 import javax.swing.*;
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,7 +23,7 @@ public class ConnexionAttente extends MenuMin {
     private JPanel center_sub;
     private Button but_retour;
     JeuOnline jeuOnline;
-    Connexion connexion_precedent;
+    public Connexion connexion_precedent;
     public String adresse;
     public int port;
     public ConnexionAttente(Connexion connexion_precedent,String adresse,int port) {
@@ -34,6 +32,7 @@ public class ConnexionAttente extends MenuMin {
         this.adresse = adresse;
         this.port = port;
 
+        label = new JLabel(string_message_attente);
         center.setLayout(new BorderLayout());
 
         center_sub = new JPanel();
@@ -41,7 +40,7 @@ public class ConnexionAttente extends MenuMin {
         gridLayout = new GridLayout(1,1);
         center_sub.setLayout(gridLayout);
 
-        label = new JLabel(string_message_attente);
+
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setFont(Utiles.font_bold);
         animLabel = new AnimLabel(label,300,new String[]{string_message_attente,string_message_attente+".",string_message_attente+"..",string_message_attente+"...",
@@ -85,4 +84,5 @@ public class ConnexionAttente extends MenuMin {
     public void retour(){
         Main.AllerA(connexion_precedent);
     }
+
 }

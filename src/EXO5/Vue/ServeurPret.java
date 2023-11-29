@@ -100,6 +100,7 @@ public class ServeurPret extends JPanel{
         //Bouton JOUER
 
         button_jouer = new JButton("Cliquez ici pour commencer le Jeu");button_jouer.setFont(font_button_bold);
+        button_jouer.setIcon(new ImageIcon("images/manette.png"));
         button_jouer.setBackground(new Color(255,255,0));button_jouer.setForeground(black);
             Color[] colors_button_jouer = new Color[]{new Color(255,255,0),new Color(255,0,255),new Color(0,255,255)};
             AnimColor animColor_button_jouer = new AnimColor(button_jouer,AnimColor.BACKGROUND,600,colors_button_jouer);
@@ -109,7 +110,8 @@ public class ServeurPret extends JPanel{
                 public void mouseClicked(MouseEvent mouseEvent) {
                     new ServeurSend(new Message(Message.TYPE_START));
                     jeuOnline.show();
-                jeuOnline.buts[0].doClick();}
+                    jeuOnline.buts[0].doClick();
+                }
                 @Override
                 public void mousePressed(MouseEvent mouseEvent) {}
                 @Override
@@ -129,6 +131,7 @@ public class ServeurPret extends JPanel{
 
         //button retour
         button_retour = new Button("<< Retour a la configuration");
+        //button_retour.setPreferredSize(new Dimension(70,70));
         button_retour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

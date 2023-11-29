@@ -54,8 +54,8 @@ public class Mode extends MenuMin {
 		this.gl2 = new GridLayout(1,2);
 
 		zoneButs.setLayout(gl2);
-		but_serveur = new Button(nomBut_serveur);
-		but_client = new Button(nomBut_client);
+		but_serveur = new Button(nomBut_serveur,new ImageIcon("images/serveur.png"));
+		but_client = new Button(nomBut_client, new ImageIcon("images/client.png"));
 		zoneButs.add(but_serveur);
 		zoneButs.add(but_client);
 

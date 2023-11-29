@@ -95,6 +95,7 @@ public class Cli extends Thread{
                             break;
                         case (Message.TYPE_TEXT) :
                             System.out.println("Message : ====" + message.getText() + "===");
+                            jeuOnline.getTchat().addLine(message.getText());
                             break;
                         case (Message.TYPE_PRESENTATION) :
                             break;
@@ -127,6 +128,16 @@ public class Cli extends Thread{
     public void envoiCoord (int pos) {
         try {
             bufWriter.writeObject(new Message(pos, false));
+            bufWriter.flush();
+            System.out.println("client envoie");
+        }catch (IOException ie){
+            System.out.println("Client i/o problem");
+            ie.printStackTrace();
+        }
+    }
+    public void envoiMessage (String message) {
+        try {
+            bufWriter.writeObject(new Message(Message.TYPE_TEXT,message));
             bufWriter.flush();
             System.out.println("client envoie");
         }catch (IOException ie){
@@ -173,8 +184,17 @@ public class Cli extends Thread{
             bufReader.close();
             bufWriter.close();
             sock.close();
+            Main.AllerA(jeuOnline.fen_connexion.connexion_precedent);
         }catch (IOException io){
             io.printStackTrace();
         }
+    }
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
     }
 }

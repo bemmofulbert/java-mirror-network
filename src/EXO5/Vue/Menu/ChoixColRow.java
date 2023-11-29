@@ -7,7 +7,7 @@ import EXO5.Vue.ServeurPret;
 import EXO5.Vue.Utiles;
 
 import javax.swing.*;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -56,11 +56,14 @@ public class ChoixColRow extends MenuMin{
         creer2Espace();
 
         //buts retour-jouer
-        but_jouer = new Button("Jouer >>");
+        but_jouer = new Button("Jouer >>",new ImageIcon("images/start.png"));
         but_retour = new Button("<< retour au menu");
         center.add(but_retour);center.add(but_jouer);
 
         creer2Espace();
+
+        entete.lab_titre.setForeground(Color.white);
+        entete.setBackground(Utiles.black);
         initEvent();
     }
     private void initEvent(){
@@ -99,5 +102,26 @@ public class ChoixColRow extends MenuMin{
 
     public boolean isOnline() {
         return online;
+    }
+    public void paint(Graphics _g) {
+        super.paintComponent(_g);
+        Graphics2D g = (Graphics2D) _g;
+
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        Rectangle bounds = getBounds();
+        Paint gradientPaint = new GradientPaint(50, bounds.y, Utiles.black,
+                -50, bounds.y + bounds.width, Utiles.blue);
+        g.setPaint(gradientPaint);
+        g.fillRect(0, 0, bounds.width, bounds.height);
+
+        entete.repaint();
+        footer.repaint();
+        lab_col.repaint();
+        lab_ligne.repaint();
+        spin_col.repaint();
+        spin_ligne.repaint();
+        but_jouer.repaint();
+        but_retour.repaint();
     }
 }
